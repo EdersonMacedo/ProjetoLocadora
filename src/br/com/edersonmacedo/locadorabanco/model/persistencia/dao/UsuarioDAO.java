@@ -8,7 +8,4 @@ public interface UsuarioDAO {
     boolean remove(int codigo);
     List<Usuario> listAll();
     Usuario listById(int codigo);
-    
-    
-    
 }
