@@ -9,4 +9,6 @@ public interface UsuarioDAO {
     List<Usuario> listAll();
     Usuario listById(int codigo);
     
+    
+    
 }
