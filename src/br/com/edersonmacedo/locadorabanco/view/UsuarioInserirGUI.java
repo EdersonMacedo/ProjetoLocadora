@@ -4,6 +4,13 @@
  */
 package br.com.edersonmacedo.locadorabanco.view;
 
+import br.com.edersonmacedo.locadorabanco.model.Usuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author guest01
@@ -46,7 +53,7 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txDataNascimento = new javax.swing.JTextField();
         btLimpar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +63,7 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         jLabel1.setText("Codigo.:");
 
+        txCodigo.setEditable(false);
         txCodigo.setBorder(new javax.swing.border.MatteBorder(null));
         txCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,12 +140,12 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
-        jButton2.setToolTipText("Adicionar. Adiciona um novo cliente.");
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        btAdicionar.setToolTipText("Adicionar. Adiciona um novo cliente.");
+        btAdicionar.setContentAreaFilled(false);
+        btAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btAdicionarActionPerformed(evt);
             }
         });
 
@@ -189,7 +197,7 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
                     .addGroup(painelFromLayout.createSequentialGroup()
                         .addComponent(btLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(btAdicionar)))
                 .addContainerGap())
         );
         painelFromLayout.setVerticalGroup(
@@ -226,7 +234,7 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(painelFromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btLimpar)
-                    .addComponent(jButton2))
+                    .addComponent(btAdicionar))
                 .addGap(26, 26, 26))
         );
 
@@ -268,9 +276,27 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txTefoneActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Usuario u = new Usuario();
+        u.setNome(txNome.getText());
+        u.setCpf(txCpf.getText());
+        u.setLogin(txLogin.getText());
+        u.setSenha(txSenha.getText());
+        if(rbFeminino.isSelected()){
+            u.setSexo("Feminino");
+        }else if(rbMasculino.isSelected()){
+            u.setSexo("Masculino");
+        }
+        try{
+            String data = txDataNascimento.getText();
+            u.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(data));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao converter data: "+ex);
+        }
+        //u.setDataNascimento(txDataNascimento.);
+        
+    }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         txCodigo.setText("");
@@ -318,9 +344,9 @@ public class UsuarioInserirGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btLimpar;
     private javax.swing.ButtonGroup grupoSexo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
